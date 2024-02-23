@@ -1,9 +1,12 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 /*
 Plugin Name: Yay! Forms
 Plugin URI: https://yayforms.com
 Description: Embeds Yay! Forms in WordPress with various options and a user-friendly GUI for shortcode generation.
-Version: 1.0
+Version: 1.1
 Author: Yay! Forms
 Author URI: https://www.yayforms.com/?utm_source=wordpressorg&utm_medium=referral&utm_campaign=wordpressorg_integration&utm_content=directory
 License: GNU General Public License v3
@@ -69,7 +72,7 @@ function yayforms_shortcode_generator() {
                 <div id="dynamic-options"></div>
 
                 <!-- Generate Shortcode Button -->
-                <button id="yf_btn_primary" type="button" class="yf-btn-primary" onclick="generateShortcode()">Copy shortcode</button>
+                <button id="yf_btn_primary" type="button" class="yf-btn-primary" onclick="generateShortcode()">Generate and copy shortcode</button>
                 <label for="yf_generated_shortcode" id="yf_generated_shortcode_label" class="yf-label yf-generated-shortcode-label" style="display: none;">Generated Shortcode:</label>
                 <input type="text" id="yf_generated_shortcode" class="yf-generated-shortcode" readonly disabled>
                 <p id="yf_generated_shortcode_help" class="yf-text yf-text-hide yf-generated-shortcode-help">*Use this shortcode in your posts, pages or widgets to show your form.</p>
@@ -81,7 +84,7 @@ function yayforms_shortcode_generator() {
         </div>
     </div>
 
-    <script src="<?php echo plugin_dir_url(__FILE__) . 'scripts.js'; ?>"></script>
+    <script src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'scripts.js'); ?>"></script>
     <?php
 }
 
@@ -102,11 +105,18 @@ function yayforms_shortcode($atts) {
         'color' => '#000000',
     ), $atts);
 
-    // Capture URL parameters for hidden fields
     $hidden_fields = array();
+
     foreach ($_GET as $key => $value) {
-        $hidden_fields[] = htmlspecialchars($key) . '=' . htmlspecialchars($value);
+        $sanitized_key = sanitize_key($key); // Sanitiza a chave.
+        $sanitized_value = sanitize_text_field($value); // Sanitiza o valor.
+
+        $escaped_key = esc_attr($sanitized_key);
+        $escaped_value = esc_attr($sanitized_value);
+
+        $hidden_fields[] = "{$escaped_key}={$escaped_value}";
     }
+
     $hidden_fields_str = implode(',', $hidden_fields);
 
     // Generate embed code based on the chosen mode
@@ -140,12 +150,11 @@ function yayforms_shortcode($atts) {
 }
 
 function yayforms_preview_shortcode() {
-    // Verifica se o shortcode está definido
     if (isset($_POST['shortcode'])) {
-        // Processa o shortcode e retorna o HTML
-        echo do_shortcode(stripslashes($_POST['shortcode']));
+        $shortcode = sanitize_text_field($_POST['shortcode']);
+        echo do_shortcode(stripslashes($shortcode));
     }
-    wp_die(); // Encerra a execução do script
+    wp_die();
 }
 
 add_action('wp_ajax_yayforms_preview', 'yayforms_preview_shortcode');
@@ -156,4 +165,4 @@ function yayforms_enqueue_admin_styles() {
 }
 add_action('admin_enqueue_scripts', 'yayforms_enqueue_admin_styles');
 
-add_shortcode('yayform', 'yayforms_shortcode');
+add_shortcode('yayforms', 'yayforms_shortcode');

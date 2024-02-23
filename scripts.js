@@ -150,7 +150,7 @@ function getId() {
 }
 
 function getShortcode(mode) {
-    var shortcode = '[yayform id="' + id + '" mode="' + mode;
+    var shortcode = '[yayforms id="' + id + '" mode="' + mode;
 
     if (mode === 'standard') {
         var width = document.getElementById('yf_width').value;
