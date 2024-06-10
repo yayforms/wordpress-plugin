@@ -3,31 +3,27 @@ function updateFormOptions() {
     var optionsContainer = document.getElementById('dynamic-options');
     optionsContainer.innerHTML = '';
 
-    // Inputs para o modo 'standard'
     if (mode === 'standard') {
         optionsContainer.innerHTML +=
             '<label class="yf-label" for="yf_width">Width:</label>' +
-            '<input class="yf-inputs" type="text" id="yf_width" name="width" value="100%">' +
+            '<input class="yf-input" type="text" id="yf_width" name="width" value="100%">' +
             '<label class="yf-label" for="yf_height">Height:</label>' +
             '<input class="yf-input" type="text" id="yf_height" name="height" value="500px">';
     }
 
-    // Inputs para o modo 'full-page'
     if (mode === 'full-page') {
-        // Adicione aqui os inputs específicos para o modo 'full-page', se houver
+        //
     }
 
-    // Inputs para o modo 'popup'
     if (mode === 'popup') {
         optionsContainer.innerHTML +=
             '<label class="yf-label" for="yf_size">Size:</label>' +
             '<select class="yf-select" id="yf_size" name="size">' +
             '<option value="50">Small</option><option value="70">Medium</option><option value="100">Large</option>' +
             '</select>' +
-            commonInputs(); // Função para inputs comuns
+            commonInputs();
     }
 
-    // Inputs para o modo 'slider'
     if (mode === 'slider') {
         optionsContainer.innerHTML +=
             '<label class="yf-label" for="yf_position">Position:</label>' +
@@ -36,17 +32,15 @@ function updateFormOptions() {
             '</select>' +
             '<label class="yf-label" for="yf_width">Width:</label>' +
             '<input class="yf-input" type="text" id="yf_width" name="width" value="600px">' +
-            commonInputs(); // Função para inputs comuns
+            commonInputs();
     }
 
-    // Inputs para o modo 'popover'
     if (mode === 'popover') {
         optionsContainer.innerHTML +=
             '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
             '<input class="yf-input" type="color" id="yf_button_color" name="button_color" value="#000000">';
     }
 
-    // Inputs para o modo 'side-tab'
     if (mode === 'side-tab') {
         optionsContainer.innerHTML +=
             '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
@@ -56,7 +50,6 @@ function updateFormOptions() {
     }
 }
 
-// Função para gerar inputs comuns entre os modos 'popup' e 'slider'
 function commonInputs() {
     return '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
         '<input class="yf-input yf-color" type="color" id="yf_button_color" name="button_color" value="#000000">' +
@@ -96,19 +89,19 @@ function showPreview(shortcode) {
     document.getElementById('yf_generated_shortcode_label').style.display = 'block';
     document.getElementById('yf_generated_shortcode_help').style.display = 'block';
 
-    jQuery.post(ajaxurl, {
+    jQuery.post(yayforms_admin.ajax_url, {
         action: 'yayforms_preview',
-        shortcode: shortcode
+        shortcode: shortcode,
+        yayforms_preview_nonce: yayforms_admin.nonce
     }, function(response) {
         var previewContainer = document.getElementById('yf_form_preview_container');
         previewContainer.innerHTML = response;
         previewContainer.style.display = 'block';
 
-        // Carregar o script de embed do formulário
         var script = document.createElement('script');
         script.src = "//embed.yayforms.link/next/embed.js";
         script.onload = function () {
-            // Ações adicionais após o carregamento do script, se necessário
+            //
         };
         document.head.appendChild(script);
     });
@@ -130,18 +123,14 @@ function getId() {
 
     if (lastSlashIndex !== -1) {
         if (questionMarkIndex !== -1) {
-            // Se houver uma barra e um ponto de interrogação, pega o texto entre eles
             id = url.substring(lastSlashIndex + 1, questionMarkIndex);
         } else {
-            // Se houver apenas uma barra, pega o texto depois dela
             id = url.substring(lastSlashIndex + 1);
         }
     } else {
         if (questionMarkIndex !== -1) {
-            // Se não houver barra, mas houver um ponto de interrogação, pega o texto antes dele
             id = url.substring(0, questionMarkIndex);
         } else {
-            // Se não houver barra nem ponto de interrogação, considera toda a string
             id = url;
         }
     }
@@ -158,18 +147,15 @@ function getShortcode(mode) {
         shortcode += '" width="' + width + '" height="' + height;
     }
 
-// Adicionar parâmetros para o modo 'full-page'
     if (mode === 'full-page') {
-        // Adicione aqui os parâmetros específicos para o modo 'full-page', se houver
+        //
     }
 
-// Adicionar parâmetros para o modo 'popover'
     if (mode === 'popover') {
         var popoverButtonColor = document.getElementById('yf_button_color').value;
         shortcode += '" button_color="' + popoverButtonColor;
     }
 
-// Adicionar parâmetros para o modo 'side-tab'
     if (mode === 'side-tab') {
         var sideTabButtonColor = document.getElementById('yf_button_color').value;
         var sideTabButtonText = document.getElementById('yf_button_text').value;
@@ -178,7 +164,7 @@ function getShortcode(mode) {
 
     var buttonText = '';
     var buttonTextColor = '';
-    // Adicionar parâmetros para o modo 'popup'
+
     if (mode === 'popup') {
         var buttonColor = document.getElementById('yf_button_color').value;
         var fontSize = document.getElementById('yf_font_size').value + 'px';
@@ -189,7 +175,6 @@ function getShortcode(mode) {
         shortcode += '" button_color="' + buttonColor + '" font_size="' + fontSize + '" rounded_corners="' + roundedCorners + '" size="' + size + '" color="' + buttonTextColor + '" button_text="' + buttonText;
     }
 
-// Adicionar parâmetros para o modo 'slider'
     if (mode === 'slider') {
         var sliderButtonColor = document.getElementById('yf_button_color').value;
         var sliderFontSize = document.getElementById('yf_font_size').value + 'px';
@@ -201,7 +186,7 @@ function getShortcode(mode) {
         shortcode += '" button_color="' + sliderButtonColor + '" font_size="' + sliderFontSize + '" rounded_corners="' + sliderRoundedCorners + '" position="' + sliderPosition + '" width="' + sliderWidth + '" color="' + buttonTextColor + '" button_text="' + buttonText;
     }
 
-    shortcode += '"]'; // Fecha a string do shortcode
+    shortcode += '"]';
     return shortcode;
 }
 
@@ -212,7 +197,6 @@ function copyToClipboard() {
     document.body.appendChild(tempInput);
     tempInput.select();
 
-    // Copia o texto selecionado
     try {
         var successful = document.execCommand('copy');
         if (successful) {
@@ -222,7 +206,6 @@ function copyToClipboard() {
         console.log('Oops, unable to copy');
     }
 
-    // Remove o input temporário
     document.body.removeChild(tempInput);
 }
 

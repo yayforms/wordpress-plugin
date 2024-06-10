@@ -1,38 +1,39 @@
 /* style.css */
 
-body {
+/* Prefixo para garantir que os estilos afetem apenas os elementos do plugin */
+.yf-admin-page body {
     background: #FAFAFA;
 }
 
-@media only screen and (max-width: 960px) {
+.yf-admin-page @media only screen and (max-width: 960px) {
     .container {
         margin-right: 10px;
     }
 }
 
-.yf-logo {
+.yf-admin-page .yf-logo {
     height: auto;
     max-width: 100%;
     width: 150px;
 }
 
-.yf-form {
+.yf-admin-page .yf-form {
     display: flex;
     flex-direction: column;
 }
 
-.yf-label {
+.yf-admin-page .yf-label {
     font-size: .875rem;
     font-weight: 400;
     --tw-text-opacity: 1;
     color: rgb(99 99 102 / var(--tw-text-opacity));
 }
 
-.yf-color {
+.yf-admin-page .yf-color {
     padding: 0.25rem;
 }
 
-.yf-generated-shortcode {
+.yf-admin-page .yf-generated-shortcode {
     display: none;
     height: 3rem !important;
     background-color: #2C2C2E !important;
@@ -40,13 +41,13 @@ body {
     margin-bottom: 0.25rem !important;
 }
 
-#yf_form input[type="text"],
-#yf_form select,
-#yf_form input[type="number"],
-#yf_form input[type="yf_button_color"],
-#yf_form input[type="color"],
-#yf_form input[type="button"],
-.yf-input, .yf-select {
+.yf-admin-page #yf_form input[type="text"],
+.yf-admin-page #yf_form select,
+.yf-admin-page #yf_form input[type="number"],
+.yf-admin-page #yf_form input[type="yf_button_color"],
+.yf-admin-page #yf_form input[type="color"],
+.yf-admin-page #yf_form input[type="button"],
+.yf-admin-page .yf-input, .yf-admin-page .yf-select {
     height: 3rem;
     width: 100%;
     max-width: 100%;
@@ -72,7 +73,7 @@ body {
     outline-offset: 2px;
 }
 
-.yf-btn-primary {
+.yf-admin-page .yf-btn-primary {
     cursor: pointer;
     width: 100%;
     max-width: 100%;
@@ -93,16 +94,16 @@ body {
     color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.yf-btn-primary:hover {
+.yf-admin-page .yf-btn-primary:hover {
     background-color: #000000;
 }
 
-.yf-text-hide {
+.yf-admin-page .yf-text-hide {
     margin-top: 0;
     display: none;
 }
 
-.yf-text {
+.yf-admin-page .yf-text {
     margin-bottom: 1rem;
     font-size: .875rem;
     font-weight: 400;
@@ -110,7 +111,7 @@ body {
     color: rgb(99 99 102 / var(--tw-text-opacity));
 }
 
-.yf-copy-notification {
+.yf-admin-page .yf-copy-notification {
     display: none;
     position: fixed;
     top: 50px;
@@ -122,7 +123,7 @@ body {
     z-index: 1000;
 }
 
-.yf-preview-notification {
+.yf-admin-page .yf-preview-notification {
     display: none;
     position: fixed;
     top: 100px;
@@ -134,20 +135,20 @@ body {
     z-index: 1000;
 }
 
-.yf-logo-container {
+.yf-admin-page .yf-logo-container {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.yf-container {
+.yf-admin-page .yf-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%; /* Certifique-se de que o container pai tenha largura suficiente */
 }
 
-.yf-card {
+.yf-admin-page .yf-card {
     background-color: #FFFFFF;
     margin: 0 auto;
     border-radius: 0.75rem;
@@ -158,7 +159,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.yf-heading {
+.yf-admin-page .yf-heading {
     /*text-align: center;*/
     margin-bottom: 1rem;
     font-size: .75rem;
@@ -169,7 +170,7 @@ body {
     color: rgb(44 44 46 / var(--tw-text-opacity));
 }
 
-.yf-form-preview {
+.yf-admin-page .yf-form-preview {
     margin-top: 10px;
     border-radius: 0.75rem;
 }
