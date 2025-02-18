@@ -1,9 +1,8 @@
-=== Yay! Forms | Embed Custom Forms, Surveys, and Quizzes Easily ===
+=== Yay! Forms ===
 Contributors: yayforms
-Tags: yayforms, forms, surveys, quizzes, form builder, survey builder, quiz builder, custom forms, responsive forms, shortcode, wordpress forms
-Requires at least: 5.0
-Tested up to: 6.4.1
-Stable tag: 1.1
+Tags: forms, surveys, quizzes, form builder, survey builder
+Tested up to: 6.7
+Stable tag: 1.3
 License: GNU General Public License v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

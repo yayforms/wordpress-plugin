@@ -123,18 +123,6 @@
     z-index: 1000;
 }
 
-.yf-admin-page .yf-preview-notification {
-    display: none;
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background-color: #2C2C2E;
-    color: white;
-    padding: 10px;
-    border-radius: 0.275rem;
-    z-index: 1000;
-}
-
 .yf-admin-page .yf-logo-container {
     text-align: center;
     margin-top: 20px;
@@ -173,4 +161,23 @@
 .yf-admin-page .yf-form-preview {
     margin-top: 10px;
     border-radius: 0.75rem;
+}
+
+.yf-admin-page .yf-preview-note {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background-color: #F8F9FA;
+    border: 1px solid #E9ECEF;
+    border-left: 4px solid #FF6701;
+    border-radius: 4px;
+    color: #495057;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.yf-admin-page .yf-preview-note::before {
+    content: "📌";
+    margin-right: 8px;
+    font-size: 14px;
 }

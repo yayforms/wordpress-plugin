@@ -6,14 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 Plugin Name: Yay! Forms
 Plugin URI: https://yayforms.com
 Description: Embeds Yay! Forms in WordPress with various options and a user-friendly GUI for shortcode generation.
-Version: 1.2
+Version: 1.3
 Author: Yay! Forms
 Author URI: https://www.yayforms.com/?utm_source=wordpressorg&utm_medium=referral&utm_campaign=wordpressorg_integration&utm_content=directory
 License: GNU General Public License v3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
-// Add menu item for the shortcode generator in the WordPress admin
 function yayforms_menu() {
 
     $logo = 'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.0"><path fill="#ffffff" d="M 302.289062 1.308594 C 295.671875 3.023438 282.597656 9.722656 273.285156 16.175781 C 268.789062 19.28125 257.191406 27.941406 247.550781 35.457031 C 194.769531 76.390625 166.75 88.234375 122.46875 88.234375 C 102.53125 88.234375 86.683594 86.273438 61.03125 80.472656 C 44.933594 76.878906 32.925781 75.164062 24.347656 75.164062 C 18.21875 75.164062 16.828125 75.488281 12.335938 77.695312 C 7.027344 80.390625 4.328125 83.167969 1.714844 89.050781 C -0.410156 93.628906 -0.570312 103.511719 1.226562 108.742188 C 3.839844 116.011719 11.03125 129.085938 20.425781 143.382812 C 48.773438 186.601562 62.5 221.242188 65.523438 257.109375 C 66.75 271.648438 65.523438 289.625 62.011719 310.457031 C 58.25 332.269531 58.007812 334.558594 57.84375 344.28125 C 57.761719 354.410156 58.578125 357.269531 62.910156 362.253906 C 67.972656 367.972656 74.101562 369.851562 81.453125 367.972656 C 89.542969 365.851562 97.304688 360.050781 116.75 341.667969 C 148.9375 311.191406 170.179688 296.324219 194.445312 287.335938 C 202.125 284.558594 217.074219 280.472656 217.566406 281.128906 C 217.730469 281.289062 217.566406 286.191406 217.15625 292.074219 C 216.503906 302.207031 216.828125 315.277344 217.890625 326.714844 C 218.21875 330.71875 218.789062 332.433594 220.261719 333.90625 C 222.628906 336.273438 227.695312 336.4375 230.472656 334.230469 L 232.351562 332.761719 L 232.351562 306.128906 C 232.433594 291.503906 232.761719 279.25 233.089844 278.839844 C 233.496094 278.511719 241.585938 278.1875 251.0625 278.1875 C 278.023438 278.1875 291.75 281.535156 318.871094 294.445312 C 331.945312 300.734375 340.605469 303.1875 351.308594 303.59375 C 359.148438 304.003906 360.128906 303.839844 363.070312 302.125 C 371.242188 297.304688 373.773438 289.789062 373.121094 272.875 C 372.628906 260.050781 371.324219 253.675781 366.339844 238.644531 C 358.007812 213.5625 344.363281 190.277344 326.226562 170.179688 L 319.363281 162.582031 L 325.082031 154.902344 C 334.886719 141.828125 353.429688 122.386719 370.34375 107.269531 C 374.589844 103.511719 375 102.859375 375 99.753906 C 375 95.097656 372.304688 92.320312 367.730469 92.320312 C 364.789062 92.320312 363.644531 92.972656 357.679688 98.203125 C 341.667969 112.253906 325.652344 129.085938 315.113281 142.808594 C 312.5 146.242188 309.96875 149.429688 309.558594 149.835938 C 308.496094 150.980469 305.800781 144.199219 304.738281 137.828125 C 302.449219 123.367188 307.679688 106.289062 325.570312 69.851562 C 336.847656 46.8125 339.296875 41.09375 341.667969 31.617188 C 343.546875 24.265625 343.300781 16.585938 341.175781 12.335938 C 339.050781 8.25 333.007812 3.675781 327.207031 1.796875 C 320.832031 -0.328125 309.3125 -0.570312 302.289062 1.308594 Z M 139.214844 118.21875 C 141.828125 120.832031 141.910156 119.933594 138.152344 137.664062 C 129.328125 179.65625 118.789062 208.742188 101.46875 238.890625 C 96.570312 247.46875 93.136719 249.019531 88.480469 244.851562 C 85.785156 242.402344 86.109375 238.96875 89.542969 233.25 C 95.996094 222.628906 108.824219 195.179688 111.4375 186.601562 C 112.011719 184.804688 111.929688 184.804688 106.863281 186.847656 C 102.53125 188.644531 100.898438 188.890625 95.261719 188.5625 C 89.707031 188.316406 87.828125 187.746094 83.496094 185.457031 C 73.609375 180.230469 65.851562 168.464844 61.765625 152.695312 C 59.394531 143.628906 57.925781 133.578125 58.578125 131.699219 C 59.558594 128.839844 62.335938 126.632812 64.949219 126.632812 C 69.199219 126.632812 70.914062 129.328125 72.304688 138.152344 C 76.144531 163.234375 85.703125 176.878906 98.449219 175.488281 C 107.761719 174.429688 114.132812 164.625 120.996094 140.929688 C 124.589844 128.269531 128.023438 120.015625 130.390625 117.808594 C 133.171875 115.359375 136.519531 115.523438 139.214844 118.21875 Z M 289.949219 139.378906 C 292.730469 142.972656 292.15625 144.933594 284.804688 155.066406 C 254.65625 197.222656 236.683594 237.746094 233.089844 271.976562 C 232.515625 277.859375 232.191406 278.1875 224.511719 279.003906 C 217.972656 279.65625 218.300781 280.882812 220.589844 266.175781 C 223.367188 247.957031 229.25 227.777344 236.03125 212.910156 C 237.417969 209.804688 238.5625 207.109375 238.5625 206.863281 C 238.5625 206.699219 237.011719 206.78125 235.050781 207.027344 C 227.289062 208.167969 218.789062 204.410156 214.378906 197.792969 L 212.253906 194.527344 L 207.679688 198.285156 C 200.164062 204.410156 190.03125 208.25 184.230469 207.191406 C 180.636719 206.453125 176.632812 203.105469 174.917969 199.265625 L 173.53125 196.242188 L 168.871094 199.347656 C 159.148438 205.882812 149.265625 208.089844 142.808594 205.230469 C 133.414062 201.144531 130.964844 189.707031 136.847656 177.695312 C 141.585938 167.972656 154.25 156.046875 162.828125 153.269531 C 165.03125 152.53125 169.117188 151.960938 171.894531 151.960938 C 177.042969 151.960938 184.640625 153.921875 184.640625 155.308594 C 184.640625 155.636719 183.332031 158.332031 181.699219 161.273438 C 179.003906 166.257812 178.675781 166.503906 176.796875 165.851562 C 174.101562 164.789062 170.261719 164.871094 166.339844 165.929688 C 162.335938 167.074219 151.308594 177.777344 148.855469 183.089844 C 146.894531 187.171875 146.488281 192.730469 148.121094 192.890625 C 157.597656 193.710938 169.527344 183.90625 180.882812 165.851562 C 187.988281 154.574219 189.625 152.777344 192.566406 152.777344 C 195.015625 152.777344 199.347656 156.945312 199.347656 159.3125 C 199.347656 160.292969 197.304688 164.460938 194.851562 168.710938 C 188.234375 179.65625 184.96875 189.789062 186.765625 193.054688 C 187.746094 194.769531 192.15625 193.21875 197.710938 189.132812 C 205.71875 183.25 208.332031 177.859375 209.96875 163.808594 C 210.539062 159.3125 211.4375 154.492188 212.171875 153.023438 C 214.460938 148.039062 220.507812 147.710938 223.53125 152.371094 C 224.835938 154.328125 224.835938 155.308594 223.9375 162.828125 C 221.976562 177.859375 221.976562 180.066406 223.449219 185.128906 C 225.734375 193.136719 229.003906 195.097656 236.191406 192.730469 C 243.21875 190.359375 251.226562 181.289062 264.542969 160.949219 C 272.957031 148.203125 279.574219 139.378906 281.699219 138.070312 C 284.394531 136.519531 288.152344 137.171875 289.949219 139.378906 Z M 313.480469 158.496094 L 317.648438 162.988281 L 311.273438 173.203125 C 307.679688 178.839844 303.921875 184.070312 302.777344 184.96875 C 299.183594 187.746094 293.300781 184.558594 293.300781 179.738281 C 293.300781 178.429688 294.445312 175.410156 295.832031 173.039062 C 300.734375 164.707031 308.25 153.511719 308.742188 153.757812 C 308.988281 153.921875 311.109375 156.046875 313.480469 158.496094 Z M 290.605469 199.753906 C 293.464844 201.796875 293.628906 204.984375 291.175781 211.109375 C 288.890625 216.910156 286.847656 218.953125 283.414062 218.953125 C 280.800781 218.953125 276.960938 215.359375 276.960938 212.828125 C 276.960938 210.292969 280.148438 202.613281 282.109375 200.328125 C 284.070312 198.203125 287.988281 197.957031 290.605469 199.753906 Z M 290.605469 199.753906 " fill-opacity="1" fill-rule="nonzero"/></svg>');
@@ -29,6 +28,11 @@ function yayforms_menu() {
     );
 }
 add_action('admin_menu', 'yayforms_menu');
+
+function yayforms_enqueue_scripts() {
+    wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
+}
+add_action('wp_enqueue_scripts', 'yayforms_enqueue_scripts');
 
 function yayforms_shortcode_generator() {
     ?>
@@ -47,14 +51,11 @@ function yayforms_shortcode_generator() {
                 <div class="yf-copy-notification" id="yf_copy_notification">
                     Shortcode copied to clipboard!
                 </div>
-                <div class="yf-preview-notification" id="yf_preview_notification">
-                    Press ESC to exit the preview...
-                </div>
                 <h1 class="yf-heading">Yay! Forms</h1>
                 <p class="yf-text">Yay! Forms is an online form builder software featuring user-friendly design and AI-driven insights, streamlining form creation and data analysis. It caters to businesses seeking efficient, engaging, and intelligent form-building solutions.</p>
                 <p class="yf-text">This plugin offers a streamlined interface for generating shortcodes to embed custom forms, surveys, and quizzes into your posts, pages, or widgets. Requires a Yay! Forms account, available at <a href="https://www.yayforms.com" target="_blank">Yay! Forms</a>.</p>
                 <form id="yf_form" class="yf-form">
-                    <?php wp_nonce_field('yayforms_preview_nonce_action', 'yayforms_preview_nonce'); ?>
+                    <?php wp_nonce_field('yayforms_preview_action', 'yayforms_nonce'); ?>
                     <label class="yf-label" for="yf_id">Your Form URL or ID:</label>
                     <input class="yf-input" type="text" id="yf_id" name="id" required value="53omzj7">
 
@@ -83,11 +84,11 @@ function yayforms_shortcode_generator() {
         </div>
     </div>
 
-    <script src="<?php echo esc_url(plugin_dir_url(__FILE__) . 'scripts.js'); ?>"></script>
     <?php
+
+    wp_enqueue_script('yayforms-admin-script');
 }
 
-// Register the shortcode in WordPress
 function yayforms_shortcode($atts) {
     $atts = shortcode_atts(array(
         'id' => '',
@@ -96,74 +97,138 @@ function yayforms_shortcode($atts) {
         'mode' => 'standard',
         'size' => '70',
         'position' => 'right',
-        'button_color' => '#ffffff',
+        'button_color' => '#FFFFFF',
         'font_size' => '20px',
         'rounded_corners' => '0px',
         'button_text' => 'Try me!',
         'color' => '#000000',
     ), $atts);
 
-    $hidden_fields = array();
+    // Verificar nonce apenas se estiver na prévia do admin
+    if (wp_doing_ajax()) {
+        if (!isset($_REQUEST['yayforms_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
+            return 'Error: Security check failed.';
+        }
+    }
 
+    // Sanitize and escape all attributes
+    $id = esc_attr(sanitize_text_field($atts['id']));
+    $width = esc_attr(sanitize_text_field($atts['width']));
+    $height = esc_attr(sanitize_text_field($atts['height']));
+    $mode = esc_attr(sanitize_text_field($atts['mode']));
+    $size = esc_attr(sanitize_text_field($atts['size']));
+    $position = esc_attr(sanitize_text_field($atts['position']));
+    $button_color = esc_attr(sanitize_hex_color($atts['button_color']));
+    $font_size = esc_attr(sanitize_text_field($atts['font_size']));
+    $rounded_corners = esc_attr(sanitize_text_field($atts['rounded_corners']));
+    $button_text = esc_html(sanitize_text_field($atts['button_text']));
+    $color = esc_attr(sanitize_hex_color($atts['color']));
+
+    $hidden_fields = array();
     foreach ($_GET as $key => $value) {
         $sanitized_key = sanitize_key($key);
         $sanitized_value = sanitize_text_field($value);
-
         $escaped_key = esc_attr($sanitized_key);
         $escaped_value = esc_attr($sanitized_value);
-
         $hidden_fields[] = "{$escaped_key}={$escaped_value}";
     }
 
-    $hidden_fields_str = implode(',', $hidden_fields);
+    $hidden_fields_str = esc_attr(implode(',', $hidden_fields));
 
     $embed_code = "";
-    switch ($atts['mode']) {
+    switch ($mode) {
         case 'standard':
-            $embed_code = "<div data-yf-widget='{$atts['id']}' data-yf-hidden='{$hidden_fields_str}' style='width:{$atts['width']};height:{$atts['height']};'></div>";
+            $embed_code = sprintf(
+                '<div data-yf-widget="%s" data-yf-hidden="%s" style="width:%s;height:%s;"></div>',
+                $id,
+                $hidden_fields_str,
+                $width,
+                $height
+            );
             break;
         case 'full-page':
-            $embed_code = "<div data-yf-widget='{$atts['id']}' data-yf-hidden='{$hidden_fields_str}' style='width:100%;height:100%;opacity:100;'></div>";
+            $embed_code = sprintf(
+                '<div data-yf-widget="%s" data-yf-hidden="%s" style="width:100%%;height:100%%;opacity:100;"></div>',
+                $id,
+                $hidden_fields_str
+            );
             break;
         case 'popup':
-            $embed_code = "<button data-yf-popup='{$atts['id']}' data-yf-size='{$atts['size']}' data-yf-hidden='{$hidden_fields_str}' style='all:unset; font-family:Helvetica,Arial,sans-serif; display:inline-block; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:{$atts['font_size']}; padding:0 33px; font-weight:bold; height:50px; cursor:pointer; line-height:50px; text-align:center; margin:0; text-decoration:none; background-color:{$atts['button_color']}; border-radius:{$atts['rounded_corners']}; color: {$atts['color']};'>{$atts['button_text']}</button>";
+            $embed_code = sprintf(
+                '<button data-yf-popup="%s" data-yf-size="%s" data-yf-hidden="%s" style="all:unset; font-family:Helvetica,Arial,sans-serif; display:inline-block; max-width:100%%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:%s; padding:0 33px; font-weight:bold; height:50px; cursor:pointer; line-height:50px; text-align:center; margin:0; text-decoration:none; background-color:%s; border-radius:%s; color:%s; box-shadow:0 0 10px rgba(0,0,0,0.2); transition:all 0.2s ease-in-out;">%s</button>',
+                $id,
+                $size,
+                $hidden_fields_str,
+                $font_size,
+                $button_color,
+                $rounded_corners,
+                $color,
+                $button_text
+            );
             break;
         case 'slider':
-            $embed_code = "<button data-yf-slider='{$atts['id']}' data-yf-width='{$atts['width']}' data-yf-position='{$atts['position']}' data-yf-button-color='{$atts['button_color']}' data-yf-hidden='{$hidden_fields_str}' style='all:unset; font-family:Helvetica,Arial,sans-serif; display:inline-block; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background-color:{$atts['button_color']}; color:{$atts['color']}; padding:0 33px; font-weight:bold; height:50px; cursor:pointer; line-height:50px; text-align:center; margin:0; text-decoration:none; font-size:{$atts['font_size']}; border-radius:{$atts['rounded_corners']};'>{$atts['button_text']}</button>";
+            $embed_code = sprintf(
+                '<button data-yf-slider="%s" data-yf-width="%s" data-yf-position="%s" data-yf-button-color="%s" data-yf-hidden="%s" style="all:unset; font-family:Helvetica,Arial,sans-serif; display:inline-block; max-width:100%%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background-color:%s; color:%s; padding:0 33px; font-weight:bold; height:50px; cursor:pointer; line-height:50px; text-align:center; margin:0; text-decoration:none; font-size:%s; border-radius:%s;">%s</button>',
+                $id,
+                $width,
+                $position,
+                $button_color,
+                $hidden_fields_str,
+                $button_color,
+                $color,
+                $font_size,
+                $rounded_corners,
+                $button_text
+            );
             break;
         case 'popover':
-            $embed_code = "<div data-yf-popover='{$atts['id']}' data-yf-button-color='{$atts['button_color']}' data-yf-hidden='{$hidden_fields_str}' style='background-color: {$atts['button_color']};'></div>";
+            $embed_code = sprintf(
+                '<div data-yf-popover="%s" data-yf-button-color="%s" data-yf-hidden="%s" style="background-color:%s;"></div>',
+                $id,
+                $button_color,
+                $hidden_fields_str,
+                $button_color
+            );
             break;
         case 'side-tab':
-            $embed_code = "<div data-yf-sidetab='{$atts['id']}' data-yf-button-text='{$atts['button_text']}' data-yf-button-color='{$atts['button_color']}' data-yf-hidden='{$hidden_fields_str}'></div>";
+            $embed_code = sprintf(
+                '<div data-yf-sidetab="%s" data-yf-button-text="%s" data-yf-button-color="%s" data-yf-hidden="%s"></div>',
+                $id,
+                $button_text,
+                $button_color,
+                $hidden_fields_str
+            );
             break;
         default:
-            $embed_code = "<p>Error: Unsupported display mode.</p>";
-            break;
+            return '';
     }
 
-    $embed_code .= "<script src='//embed.yayforms.link/next/embed.js'></script>";
+    wp_enqueue_script('yayforms-embed');
     return $embed_code;
 }
 
 function yayforms_preview_shortcode() {
-    // Verifica se o nonce está presente e válido
-    if (!isset($_POST['yayforms_preview_nonce']) || !wp_verify_nonce($_POST['yayforms_preview_nonce'], 'yayforms_preview_nonce_action')) {
-        wp_die('Invalid nonce verification.');
+    if (!isset($_POST['yayforms_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['yayforms_nonce'])), 'yayforms_preview_action')) {
+        wp_send_json_error('Error: Security check failed.');
+        wp_die();
     }
 
-    // Verifica se o usuário tem a permissão necessária
     if (!current_user_can('manage_options')) {
-        wp_die('Unauthorized user.');
+        wp_send_json_error('Unauthorized user.');
+        wp_die();
     }
 
-    if (isset($_POST['shortcode'])) {
-        $shortcode = sanitize_text_field($_POST['shortcode']);
-        echo do_shortcode(stripslashes($shortcode));
+    if (!isset($_POST['shortcode'])) {
+        wp_send_json_error('Shortcode parameter is missing.');
+        wp_die();
     }
+    
+    $shortcode = sanitize_text_field(wp_unslash($_POST['shortcode']));
+    
+    $output = do_shortcode($shortcode);
+    wp_send_json_success($output);
     wp_die();
 }
-
 add_action('wp_ajax_yayforms_preview', 'yayforms_preview_shortcode');
 
 function yayforms_enqueue_admin_styles($hook) {
@@ -171,13 +236,12 @@ function yayforms_enqueue_admin_styles($hook) {
         return;
     }
 
-    wp_enqueue_style('yayforms-admin-styles', plugin_dir_url(__FILE__) . 'style.css');
-    wp_enqueue_script('yayforms-admin-script', plugin_dir_url(__FILE__) . 'scripts.js', array('jquery'), false, true);
+    wp_enqueue_style('yayforms-admin-styles', plugin_dir_url(__FILE__) . 'style.css', array(), '1.3');
+    wp_enqueue_script('yayforms-admin-script', plugin_dir_url(__FILE__) . 'scripts.js', array('jquery'), '1.3', true);
 
-    // Localizar o script para adicionar o nonce
     wp_localize_script('yayforms-admin-script', 'yayforms_admin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('yayforms_preview_nonce_action')
+        'nonce' => wp_create_nonce('yayforms_preview_action')
     ));
 }
 
