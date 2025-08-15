@@ -33,6 +33,7 @@ function yayforms_enqueue_scripts() {
     wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
 }
 add_action('wp_enqueue_scripts', 'yayforms_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'yayforms_enqueue_scripts');
 
 function yayforms_shortcode_generator() {
     ?>
@@ -203,7 +204,17 @@ function yayforms_shortcode($atts) {
             return '';
     }
 
+    // Garantir que o script seja carregado tanto no frontend quanto no admin
+    if (!wp_script_is('yayforms-embed', 'registered')) {
+        wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
+    }
     wp_enqueue_script('yayforms-embed');
+    
+    // Para Elementor preview, adicionar o script diretamente no HTML
+    if (is_admin() || (isset($_GET['elementor-preview']) || isset($_GET['action']) && $_GET['action'] === 'elementor')) {
+        $embed_code .= '<script src="//embed.yayforms.link/next/embed.js"></script>';
+    }
+    
     return $embed_code;
 }
 
