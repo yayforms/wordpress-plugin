@@ -104,9 +104,9 @@ function yayforms_shortcode($atts) {
         'color' => '#000000',
     ), $atts);
 
-    // Verificar nonce apenas se estiver na prévia do admin
-    if (wp_doing_ajax()) {
-        if (!isset($_REQUEST['yayforms_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
+    // Verificar nonce apenas se estiver fazendo AJAX e tiver nonce disponível
+    if (wp_doing_ajax() && isset($_REQUEST['yayforms_nonce'])) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
             return 'Error: Security check failed.';
         }
     }
