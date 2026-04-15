@@ -33,6 +33,7 @@ function yayforms_enqueue_scripts() {
     wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
 }
 add_action('wp_enqueue_scripts', 'yayforms_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'yayforms_enqueue_scripts');
 
 function yayforms_shortcode_generator() {
     ?>
@@ -104,9 +105,8 @@ function yayforms_shortcode($atts) {
         'color' => '#000000',
     ), $atts);
 
-    // Verificar nonce apenas se estiver na prévia do admin
-    if (wp_doing_ajax()) {
-        if (!isset($_REQUEST['yayforms_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
+    if (wp_doing_ajax() && isset($_REQUEST['yayforms_nonce'])) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
             return 'Error: Security check failed.';
         }
     }
@@ -203,7 +203,20 @@ function yayforms_shortcode($atts) {
             return '';
     }
 
+    // Garantir que o script seja carregado tanto no frontend quanto no admin
+    if (!wp_script_is('yayforms-embed', 'registered')) {
+        wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
+    }
     wp_enqueue_script('yayforms-embed');
+
+    // In admin/AJAX contexts (e.g. page builder previews) wp_footer may not run,
+    // so print the registered script inline as a fallback.
+    if (is_admin() || wp_doing_ajax()) {
+        ob_start();
+        wp_print_scripts('yayforms-embed');
+        $embed_code .= ob_get_clean();
+    }
+    
     return $embed_code;
 }
 
