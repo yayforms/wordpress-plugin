@@ -1,0 +1,33 @@
+# Git
+.git
+.github
+.gitignore
+.distignore
+
+# Editors / OS
+.DS_Store
+.idea
+.vscode
+*.swp
+
+# Documentation and Claude config
+CLAUDE.md
+*.md
+
+# WordPress.org directory assets live in their own SVN path, not inside the plugin zip
+.wordpress-org
+
+# Legacy SVN working copy (pre-Actions workflow)
+yayforms
+
+# Dev tooling (in case it gets added later)
+node_modules
+tests
+phpunit.xml
+phpunit.xml.dist
+phpcs.xml
+phpcs.xml.dist
+composer.json
+composer.lock
+package.json
+package-lock.json
