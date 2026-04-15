@@ -208,12 +208,13 @@ function yayforms_shortcode($atts) {
         wp_register_script('yayforms-embed', '//embed.yayforms.link/next/embed.js', array(), '1.3', true);
     }
     wp_enqueue_script('yayforms-embed');
-    
-    // For Elementor preview, inject the script tag inline
-    $is_elementor_preview = isset($_GET['elementor-preview'])
-        || (isset($_GET['action']) && sanitize_text_field(wp_unslash($_GET['action'])) === 'elementor');
-    if (is_admin() || $is_elementor_preview) {
-        $embed_code .= '<script src="https://embed.yayforms.link/next/embed.js"></script>';
+
+    // In admin/AJAX contexts (e.g. page builder previews) wp_footer may not run,
+    // so print the registered script inline as a fallback.
+    if (is_admin() || wp_doing_ajax()) {
+        ob_start();
+        wp_print_scripts('yayforms-embed');
+        $embed_code .= ob_get_clean();
     }
     
     return $embed_code;
