@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# SVN mirror used to publish to wordpress.org — not tracked in git
+yayforms/

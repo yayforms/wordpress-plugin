@@ -1,8 +1,10 @@
 === Yay! Forms ===
 Contributors: yayforms
 Tags: forms, surveys, quizzes, form builder, survey builder
-Tested up to: 6.7
-Stable tag: 1.3
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 1.4
 License: GNU General Public License v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -57,6 +59,19 @@ Enhance your workflow by connecting with the tools you already use:
 
 = Upgrade Notice =
 * Keep your Yay! Forms plugin updated to ensure optimal performance and security. Stay connected with our updates and improvements by joining our [community forum or user group].
+
+== Changelog ==
+
+= 1.4 =
+* Security: Removed shortcode-level nonce bypass; hardened the admin AJAX preview handler to only render [yayforms] shortcodes.
+* Fix: URL query parameters are now read client-side by the embed loader instead of being baked into the server-rendered HTML. Prevents page caches from leaking one visitor's query parameters to other visitors.
+* Compat: Tested up to WordPress 6.8. Declared Requires at least 6.0 and Requires PHP 7.4.
+* i18n: Plugin is now fully translatable (Text Domain: yayforms).
+* UX: Replaced blocking JavaScript alerts with inline notifications. Shortcode copy now uses the modern Clipboard API. Preview notification element is now rendered.
+* Dev: Dropped jQuery dependency from the admin generator UI. Deduplicated the plugin version via a single constant.
+
+= 1.3 =
+* Prior release.
 
 == External Service Usage ==
 

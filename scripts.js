@@ -1,242 +1,310 @@
-function updateFormOptions() {
-    var mode = document.getElementById('yf_mode').value;
-    var optionsContainer = document.getElementById('dynamic-options');
-    optionsContainer.innerHTML = '';
+(function () {
+    'use strict';
 
-    document.getElementById('yf_generated_shortcode').value = '';
-    document.getElementById('yf_generated_shortcode').style.display = 'none';
-    document.getElementById('yf_generated_shortcode_label').style.display = 'none';
-    document.getElementById('yf_generated_shortcode_help').style.display = 'none';
-    document.getElementById('yf_form_preview_container').innerHTML = '';
-    document.getElementById('yf_form_preview_container').style.display = 'none';
+    var admin = window.yayforms_admin || {};
+    var i18n = admin.i18n || {};
 
-    if (mode === 'standard') {
-        optionsContainer.innerHTML +=
-            '<label class="yf-label" for="yf_width">Width:</label>' +
-            '<input class="yf-input" type="text" id="yf_width" name="width" value="100%">' +
-            '<label class="yf-label" for="yf_height">Height:</label>' +
-            '<input class="yf-input" type="text" id="yf_height" name="height" value="500px">';
+    function $(id) {
+        return document.getElementById(id);
     }
 
-    if (mode === 'popup') {
-        optionsContainer.innerHTML +=
-            '<label class="yf-label" for="yf_size">Size:</label>' +
-            '<select class="yf-select" id="yf_size" name="size">' +
-            '<option value="50">Small</option><option value="70">Medium</option><option value="100">Large</option>' +
-            '</select>' +
-            commonInputs();
+    function clearChildren(el) {
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
     }
 
-    if (mode === 'slider') {
-        optionsContainer.innerHTML +=
-            '<label class="yf-label" for="yf_position">Position:</label>' +
-            '<select class="yf-select" id="yf_position" name="position">' +
-            '<option value="right">Right</option><option value="left">Left</option>' +
-            '</select>' +
-            '<label class="yf-label" for="yf_width">Width:</label>' +
-            '<input class="yf-input" type="text" id="yf_width" name="width" value="600px">' +
-            commonInputs();
+    function field(labelText, input) {
+        var label = document.createElement('label');
+        label.className = 'yf-label';
+        label.setAttribute('for', input.id);
+        label.textContent = labelText;
+        var frag = document.createDocumentFragment();
+        frag.appendChild(label);
+        frag.appendChild(input);
+        return frag;
     }
 
-    if (mode === 'popover') {
-        optionsContainer.innerHTML +=
-            '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
-            '<input class="yf-input" type="color" id="yf_button_color" name="button_color" value="#2C2C2E">';
+    function textInput(id, name, value) {
+        var el = document.createElement('input');
+        el.className = 'yf-input';
+        el.type = 'text';
+        el.id = id;
+        el.name = name;
+        el.value = value;
+        return el;
     }
 
-    if (mode === 'side-tab') {
-        optionsContainer.innerHTML +=
-            '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
-            '<input class="yf-input" type="color" id="yf_button_color" name="button_color" value="#2C2C2E">' +
-            '<label class="yf-label" for="yf_button_text">Button Text:</label>' +
-            '<input class="yf-input" type="text" id="yf_button_text" name="button_text" value="Try me!">';
-    }
-}
-
-function commonInputs() {
-    return '<label class="yf-label" for="yf_button_color">Button Color:</label>' +
-           '<input class="yf-input" type="color" id="yf_button_color" name="button_color" value="#2C2C2E">' +
-           '<label class="yf-label" for="yf_font_size">Font Size:</label>' +
-           '<input class="yf-input" type="text" id="yf_font_size" name="font_size" value="20px">' +
-           '<label class="yf-label" for="yf_rounded_corners">Rounded Corners:</label>' +
-           '<input class="yf-input" type="text" id="yf_rounded_corners" name="rounded_corners" value="0px">' +
-           '<label class="yf-label" for="yf_button_text">Button Text:</label>' +
-           '<input class="yf-input" type="text" id="yf_button_text" name="button_text" value="Try me!">' +
-           '<label class="yf-label" for="yf_color">Text Color:</label>' +
-           '<input class="yf-input" type="color" id="yf_color" name="color" value="#FFFFFF">';
-}
-
-function generateShortcode() {
-    var id = getId()
-
-    if (id === '') {
-        alert('Please enter a valid form ID.');
-        return;
+    function colorInput(id, name, value) {
+        var el = document.createElement('input');
+        el.className = 'yf-input';
+        el.type = 'color';
+        el.id = id;
+        el.name = name;
+        el.value = value;
+        return el;
     }
 
-    var mode = document.getElementById('yf_mode').value;
-    var nonce = document.getElementById('yayforms_nonce').value;
-    var shortcode = getShortcode(mode);
+    function selectInput(id, name, options) {
+        var el = document.createElement('select');
+        el.className = 'yf-select';
+        el.id = id;
+        el.name = name;
+        options.forEach(function (opt) {
+            var o = document.createElement('option');
+            o.value = opt.value;
+            o.textContent = opt.label;
+            el.appendChild(o);
+        });
+        return el;
+    }
 
-    jQuery.post(yayforms_admin.ajax_url, {
-        action: 'yayforms_preview',
-        shortcode: shortcode,
-        yayforms_nonce: nonce
-    }, function(response) {
-        if (!response.success) {
-            alert(response.data || 'An error occurred. Please try again.');
+    function t(key, fallback) {
+        return (i18n[key] !== undefined ? i18n[key] : fallback);
+    }
+
+    function appendCommonInputs(container) {
+        container.appendChild(field(t('label_button_color', 'Button Color:'), colorInput('yf_button_color', 'button_color', '#2C2C2E')));
+        container.appendChild(field(t('label_font_size', 'Font Size:'), textInput('yf_font_size', 'font_size', '20px')));
+        container.appendChild(field(t('label_rounded', 'Rounded Corners:'), textInput('yf_rounded_corners', 'rounded_corners', '0px')));
+        container.appendChild(field(t('label_button_text', 'Button Text:'), textInput('yf_button_text', 'button_text', 'Try me!')));
+        container.appendChild(field(t('label_text_color', 'Text Color:'), colorInput('yf_color', 'color', '#FFFFFF')));
+    }
+
+    function updateFormOptions() {
+        var mode = $('yf_mode').value;
+        var container = $('dynamic-options');
+        clearChildren(container);
+
+        var shortcodeInput = $('yf_generated_shortcode');
+        shortcodeInput.value = '';
+        shortcodeInput.style.display = 'none';
+        $('yf_generated_shortcode_label').style.display = 'none';
+        $('yf_generated_shortcode_help').style.display = 'none';
+        var preview = $('yf_form_preview_container');
+        clearChildren(preview);
+        preview.style.display = 'none';
+
+        if (mode === 'standard') {
+            container.appendChild(field(t('label_width', 'Width:'), textInput('yf_width', 'width', '100%')));
+            container.appendChild(field(t('label_height', 'Height:'), textInput('yf_height', 'height', '500px')));
+        } else if (mode === 'popup') {
+            container.appendChild(field(t('label_size', 'Size:'), selectInput('yf_size', 'size', [
+                { value: '50', label: t('option_small', 'Small') },
+                { value: '70', label: t('option_medium', 'Medium') },
+                { value: '100', label: t('option_large', 'Large') }
+            ])));
+            appendCommonInputs(container);
+        } else if (mode === 'slider') {
+            container.appendChild(field(t('label_position', 'Position:'), selectInput('yf_position', 'position', [
+                { value: 'right', label: t('option_right', 'Right') },
+                { value: 'left', label: t('option_left', 'Left') }
+            ])));
+            container.appendChild(field(t('label_width', 'Width:'), textInput('yf_width', 'width', '600px')));
+            appendCommonInputs(container);
+        } else if (mode === 'popover') {
+            container.appendChild(field(t('label_button_color', 'Button Color:'), colorInput('yf_button_color', 'button_color', '#2C2C2E')));
+        } else if (mode === 'side-tab') {
+            container.appendChild(field(t('label_button_color', 'Button Color:'), colorInput('yf_button_color', 'button_color', '#2C2C2E')));
+            container.appendChild(field(t('label_button_text', 'Button Text:'), textInput('yf_button_text', 'button_text', 'Try me!')));
+        }
+    }
+
+    function getId() {
+        var url = $('yf_id').value.trim();
+        var lastSlash = url.lastIndexOf('/');
+        if (lastSlash === -1) {
+            return url;
+        }
+        var end = url.length;
+        var q = url.lastIndexOf('?');
+        var h = url.lastIndexOf('#');
+        if (q !== -1) end = Math.min(end, q);
+        if (h !== -1) end = Math.min(end, h);
+        return url.substring(lastSlash + 1, end);
+    }
+
+    function getCommonAttributes() {
+        return ' button_color="' + $('yf_button_color').value + '"' +
+            ' font_size="' + $('yf_font_size').value + '"' +
+            ' rounded_corners="' + $('yf_rounded_corners').value + '"' +
+            ' button_text="' + $('yf_button_text').value + '"' +
+            ' color="' + $('yf_color').value + '"';
+    }
+
+    function getShortcode(mode) {
+        var id = getId();
+        var shortcode = '[yayforms id="' + id + '"';
+
+        if (mode === 'standard') {
+            shortcode += ' mode="standard"';
+            shortcode += ' width="' + $('yf_width').value + '"';
+            shortcode += ' height="' + $('yf_height').value + '"';
+        } else if (mode === 'full-page') {
+            shortcode += ' mode="full-page"';
+        } else if (mode === 'popup') {
+            shortcode += ' mode="popup"';
+            shortcode += ' size="' + $('yf_size').value + '"';
+            shortcode += getCommonAttributes();
+        } else if (mode === 'slider') {
+            shortcode += ' mode="slider"';
+            shortcode += ' width="' + $('yf_width').value + '"';
+            shortcode += ' position="' + $('yf_position').value + '"';
+            shortcode += getCommonAttributes();
+        } else if (mode === 'popover') {
+            shortcode += ' mode="popover"';
+            shortcode += ' button_color="' + $('yf_button_color').value + '"';
+        } else if (mode === 'side-tab') {
+            shortcode += ' mode="side-tab"';
+            shortcode += ' button_color="' + $('yf_button_color').value + '"';
+            shortcode += ' button_text="' + $('yf_button_text').value + '"';
+        }
+
+        shortcode += ']';
+        return shortcode;
+    }
+
+    function showNotification(id, timeout) {
+        var el = $(id);
+        if (!el) return;
+        el.style.display = 'block';
+        setTimeout(function () {
+            el.style.display = 'none';
+        }, timeout || 5000);
+    }
+
+    function showError(message) {
+        var el = $('yf_error_notification');
+        if (!el) return;
+        el.textContent = message;
+        el.style.display = 'block';
+        setTimeout(function () {
+            el.style.display = 'none';
+        }, 5000);
+    }
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text).catch(function () {
+                fallbackCopy(text);
+            });
+        }
+        fallbackCopy(text);
+        return Promise.resolve();
+    }
+
+    function fallbackCopy(text) {
+        var tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'absolute';
+        tempInput.style.left = '-9999px';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            showError(i18n.copy_failed || 'Could not copy to clipboard.');
+        }
+        document.body.removeChild(tempInput);
+    }
+
+    function ensureEmbedScript() {
+        var existing = document.getElementById('yayforms-embed-script');
+        if (existing) existing.remove();
+        var script = document.createElement('script');
+        script.id = 'yayforms-embed-script';
+        script.src = admin.embed_url;
+        document.head.appendChild(script);
+    }
+
+    function generateShortcode() {
+        var id = getId();
+        if (id === '') {
+            showError(i18n.invalid_id || 'Please enter a valid form ID.');
             return;
         }
 
-        document.getElementById('yf_generated_shortcode').value = shortcode;
-        document.getElementById('yf_generated_shortcode').style.display = 'block';
-        document.getElementById('yf_generated_shortcode_label').style.display = 'block';
-        document.getElementById('yf_generated_shortcode_help').style.display = 'block';
+        var mode = $('yf_mode').value;
+        var nonce = $('yayforms_nonce').value;
+        var shortcode = getShortcode(mode);
 
-        var previewContainer = document.getElementById('yf_form_preview_container');
-        
-        if (mode === 'standard' || mode === 'full-page') {
-            previewContainer.innerHTML = response.data;
-        } else {
-            var previewHtml = '<div class="yf-preview-container">';
-            previewHtml += '<h1 class="yf-heading">Preview:</h1>';
-            previewHtml += response.data;
-            previewHtml += '<div class="yf-preview-note">Click the button to see the form in ' + mode + ' mode. Press ESC to exit the preview.</div>';
-            previewHtml += '</div>';
-            previewContainer.innerHTML = previewHtml;
+        var body = new URLSearchParams();
+        body.set('action', 'yayforms_preview');
+        body.set('shortcode', shortcode);
+        body.set('yayforms_nonce', nonce);
+
+        fetch(admin.ajax_url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: body.toString()
+        })
+            .then(function (r) { return r.json(); })
+            .then(function (response) {
+                if (!response || !response.success) {
+                    showError((response && response.data) || i18n.generic_error || 'An error occurred.');
+                    return;
+                }
+
+                $('yf_generated_shortcode').value = shortcode;
+                $('yf_generated_shortcode').style.display = 'block';
+                $('yf_generated_shortcode_label').style.display = 'block';
+                $('yf_generated_shortcode_help').style.display = 'block';
+
+                var previewContainer = $('yf_form_preview_container');
+                clearChildren(previewContainer);
+
+                if (mode === 'standard' || mode === 'full-page') {
+                    previewContainer.innerHTML = response.data;
+                } else {
+                    var wrap = document.createElement('div');
+                    wrap.className = 'yf-preview-container';
+                    var h = document.createElement('h1');
+                    h.className = 'yf-heading';
+                    h.textContent = i18n.preview_heading || 'Preview:';
+                    wrap.appendChild(h);
+                    var bodyEl = document.createElement('div');
+                    bodyEl.innerHTML = response.data;
+                    wrap.appendChild(bodyEl);
+                    var note = document.createElement('div');
+                    note.className = 'yf-preview-note';
+                    note.textContent = (i18n.preview_note || 'Click the button to see the form in %s mode. Press ESC to exit the preview.').replace('%s', mode);
+                    wrap.appendChild(note);
+                    previewContainer.appendChild(wrap);
+                }
+                previewContainer.style.display = 'block';
+
+                ensureEmbedScript();
+
+                copyToClipboard(shortcode).then(function () {
+                    showNotification('yf_copy_notification');
+                });
+
+                if (mode !== 'standard' && mode !== 'full-page') {
+                    showNotification('yf_preview_notification');
+                }
+            })
+            .catch(function () {
+                showError(i18n.generic_error || 'An error occurred.');
+            });
+    }
+
+    function init() {
+        var modeSelect = $('yf_mode');
+        if (modeSelect) {
+            modeSelect.addEventListener('change', updateFormOptions);
         }
-        previewContainer.style.display = 'block';
-
-        var existingScript = document.getElementById('yayforms-embed-script');
-        if (existingScript) {
-            existingScript.remove();
+        var btn = $('yf_btn_primary');
+        if (btn) {
+            btn.addEventListener('click', generateShortcode);
         }
-
-        var script = document.createElement('script');
-        script.id = 'yayforms-embed-script';
-        script.src = '//embed.yayforms.link/next/embed.js';
-        document.head.appendChild(script);
-
-        copyToClipboard();
-
-        if (mode !== 'standard' && mode !== 'full-page') {
-            showNotification('yf_preview_notification');
-        }
-    });
-}
-
-function getId() {
-    var url = document.getElementById('yf_id').value;
-    var lastSlashIndex = url.lastIndexOf('/');
-    var lastQuestionMarkIndex = url.lastIndexOf('?');
-    var lastHashIndex = url.lastIndexOf('#');
-
-    if (lastSlashIndex === -1) {
-        return url;
+        updateFormOptions();
     }
 
-    var endIndex = url.length;
-    if (lastQuestionMarkIndex !== -1) {
-        endIndex = Math.min(endIndex, lastQuestionMarkIndex);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
-    if (lastHashIndex !== -1) {
-        endIndex = Math.min(endIndex, lastHashIndex);
-    }
-
-    return url.substring(lastSlashIndex + 1, endIndex);
-}
-
-function getShortcode(mode) {
-    var id = getId();
-    var shortcode = '[yayforms id="' + id + '"';
-
-    if (mode === 'standard') {
-        var width = document.getElementById('yf_width').value;
-        var height = document.getElementById('yf_height').value;
-        shortcode += ' mode="standard"';
-        shortcode += ' width="' + width + '"';
-        shortcode += ' height="' + height + '"';
-    }
-
-    if (mode === 'full-page') {
-        shortcode += ' mode="full-page"';
-    }
-
-    if (mode === 'popup') {
-        var size = document.getElementById('yf_size').value;
-        shortcode += ' mode="popup"';
-        shortcode += ' size="' + size + '"';
-        shortcode += getCommonAttributes();
-    }
-
-    if (mode === 'slider') {
-        var width = document.getElementById('yf_width').value;
-        var position = document.getElementById('yf_position').value;
-        shortcode += ' mode="slider"';
-        shortcode += ' width="' + width + '"';
-        shortcode += ' position="' + position + '"';
-        shortcode += getCommonAttributes();
-    }
-
-    if (mode === 'popover') {
-        var buttonColor = document.getElementById('yf_button_color').value;
-        shortcode += ' mode="popover"';
-        shortcode += ' button_color="' + buttonColor + '"';
-    }
-
-    if (mode === 'side-tab') {
-        var buttonColor = document.getElementById('yf_button_color').value;
-        var buttonText = document.getElementById('yf_button_text').value;
-        shortcode += ' mode="side-tab"';
-        shortcode += ' button_color="' + buttonColor + '"';
-        shortcode += ' button_text="' + buttonText + '"';
-    }
-
-    shortcode += ']';
-    return shortcode;
-}
-
-function getCommonAttributes() {
-    var buttonColor = document.getElementById('yf_button_color').value;
-    var fontSize = document.getElementById('yf_font_size').value;
-    var roundedCorners = document.getElementById('yf_rounded_corners').value;
-    var buttonText = document.getElementById('yf_button_text').value;
-    var color = document.getElementById('yf_color').value;
-
-    return ' button_color="' + buttonColor + '"' +
-           ' font_size="' + fontSize + '"' +
-           ' rounded_corners="' + roundedCorners + '"' +
-           ' button_text="' + buttonText + '"' +
-           ' color="' + color + '"';
-}
-
-function showNotification(element) {
-    var notification = document.getElementById(element);
-    notification.style.display = 'block';
-
-    setTimeout(function() {
-        notification.style.display = 'none';
-    }, 5000);
-}
-
-function copyToClipboard() {
-    var element = document.getElementById('yf_generated_shortcode');
-    var tempInput = document.createElement('input');
-    tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
-    tempInput.value = element.value;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    var modeSelect = document.getElementById('yf_mode');
-    if (modeSelect) {
-        modeSelect.addEventListener('change', function() {
-            updateFormOptions();
-        });
-    }
-});
-
-window.onload = updateFormOptions;
+})();
