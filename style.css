@@ -1,14 +1,15 @@
 /* style.css */
 
-/* Prefixo para garantir que os estilos afetem apenas os elementos do plugin */
-.yf-admin-page body {
-    background: #FAFAFA;
-}
-
-.yf-admin-page @media only screen and (max-width: 960px) {
-    .container {
+/* Prefix to ensure styles only affect plugin elements */
+@media only screen and (max-width: 960px) {
+    .yf-admin-page .yf-container {
         margin-right: 10px;
     }
+}
+
+.yf-admin-page .yf-error-notification {
+    background-color: #B00020;
+    display: none;
 }
 
 .yf-admin-page .yf-logo {
