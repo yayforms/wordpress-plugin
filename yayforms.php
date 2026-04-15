@@ -105,7 +105,6 @@ function yayforms_shortcode($atts) {
         'color' => '#000000',
     ), $atts);
 
-    // Verificar nonce apenas se estiver fazendo AJAX e tiver nonce disponível
     if (wp_doing_ajax() && isset($_REQUEST['yayforms_nonce'])) {
         if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['yayforms_nonce'])), 'yayforms_preview_action')) {
             return 'Error: Security check failed.';
@@ -211,8 +210,10 @@ function yayforms_shortcode($atts) {
     wp_enqueue_script('yayforms-embed');
     
     // Para Elementor preview, adicionar o script diretamente no HTML
-    if (is_admin() || (isset($_GET['elementor-preview']) || isset($_GET['action']) && $_GET['action'] === 'elementor')) {
-        $embed_code .= '<script src="//embed.yayforms.link/next/embed.js"></script>';
+    $is_elementor_preview = isset($_GET['elementor-preview'])
+        || (isset($_GET['action']) && sanitize_text_field(wp_unslash($_GET['action'])) === 'elementor');
+    if (is_admin() || $is_elementor_preview) {
+        $embed_code .= '<script src="https://embed.yayforms.link/next/embed.js"></script>';
     }
     
     return $embed_code;
