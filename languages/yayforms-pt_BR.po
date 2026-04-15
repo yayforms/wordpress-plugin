@@ -1,0 +1,193 @@
+# Copyright (C) 2026 Yay! Forms
+# This file is distributed under the GPL v3 license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Yay! Forms 1.4\n"
+"Report-Msgid-Bugs-To: help@yayforms.com\n"
+"POT-Creation-Date: 2026-04-15 00:00+0000\n"
+"PO-Revision-Date: 2026-04-15 00:00+0000\n"
+"Last-Translator: Yay! Forms <help@yayforms.com>\n"
+"Language-Team: Portuguese (Brazil) <help@yayforms.com>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: yayforms\n"
+
+#: yayforms.php:36 yayforms.php:37 yayforms.php:67 yayforms.php:78
+msgid "Yay! Forms"
+msgstr "Yay! Forms"
+
+#: yayforms.php:72
+msgid "Shortcode copied to clipboard!"
+msgstr "Shortcode copiado para a área de transferência!"
+
+#: yayforms.php:75
+msgid "Preview ready — click the button below to try the form."
+msgstr "Prévia pronta — clique no botão abaixo para testar o formulário."
+
+#: yayforms.php:79
+msgid ""
+"Yay! Forms is an online form builder software featuring user-friendly design "
+"and AI-driven insights, streamlining form creation and data analysis. It "
+"caters to businesses seeking efficient, engaging, and intelligent form-"
+"building solutions."
+msgstr ""
+"Yay! Forms é um criador de formulários online com design amigável e insights "
+"baseados em IA, agilizando a criação de formulários e a análise de dados. "
+"Ideal para empresas que buscam soluções eficientes, envolventes e "
+"inteligentes para construção de formulários."
+
+#. translators: %s: link to yayforms.com
+#: yayforms.php:84
+#, php-format
+msgid ""
+"This plugin offers a streamlined interface for generating shortcodes to "
+"embed custom forms, surveys, and quizzes into your posts, pages, or widgets. "
+"Requires a Yay! Forms account, available at %s."
+msgstr ""
+"Este plugin oferece uma interface simples para gerar shortcodes que incorporam "
+"formulários, pesquisas e quizzes personalizados em seus posts, páginas ou "
+"widgets. Requer uma conta Yay! Forms, disponível em %s."
+
+#: yayforms.php:91
+msgid "Your Form URL or ID:"
+msgstr "URL ou ID do seu formulário:"
+
+#: yayforms.php:94
+msgid "Display Mode:"
+msgstr "Modo de exibição:"
+
+#: yayforms.php:96
+msgid "Standard"
+msgstr "Padrão"
+
+#: yayforms.php:97
+msgid "Full-page"
+msgstr "Página inteira"
+
+#: yayforms.php:98
+msgid "Popup"
+msgstr "Popup"
+
+#: yayforms.php:99
+msgid "Slider"
+msgstr "Slider"
+
+#: yayforms.php:100
+msgid "Popover"
+msgstr "Popover"
+
+#: yayforms.php:101
+msgid "Side Tab"
+msgstr "Aba lateral"
+
+#: yayforms.php:106
+msgid "Generate and copy shortcode"
+msgstr "Gerar e copiar shortcode"
+
+#: yayforms.php:107
+msgid "Generated Shortcode:"
+msgstr "Shortcode gerado:"
+
+#: yayforms.php:109
+msgid "*Use this shortcode in your posts, pages or widgets to show your form."
+msgstr "*Use este shortcode em seus posts, páginas ou widgets para exibir o formulário."
+
+#: yayforms.php:227
+msgid "Error: Security check failed."
+msgstr "Erro: a verificação de segurança falhou."
+
+#: yayforms.php:231
+msgid "Unauthorized user."
+msgstr "Usuário não autorizado."
+
+#: yayforms.php:235
+msgid "Shortcode parameter is missing."
+msgstr "Parâmetro do shortcode ausente."
+
+#: yayforms.php:241
+msgid "Only [yayforms] shortcodes can be previewed."
+msgstr "Apenas shortcodes [yayforms] podem ser visualizados."
+
+#: yayforms.php:261
+msgid "Please enter a valid form ID."
+msgstr "Informe um ID de formulário válido."
+
+#: yayforms.php:262
+msgid "An error occurred. Please try again."
+msgstr "Ocorreu um erro. Tente novamente."
+
+#: yayforms.php:263
+msgid "Could not copy to clipboard. Please copy manually."
+msgstr "Não foi possível copiar para a área de transferência. Copie manualmente."
+
+#: yayforms.php:264
+msgid "Preview:"
+msgstr "Prévia:"
+
+#. translators: %s: display mode name (e.g. popup, slider)
+#: yayforms.php:266
+#, php-format
+msgid ""
+"Click the button to see the form in %s mode. Press ESC to exit the preview."
+msgstr ""
+"Clique no botão para ver o formulário no modo %s. Pressione ESC para sair da "
+"prévia."
+
+#: yayforms.php:267
+msgid "Width:"
+msgstr "Largura:"
+
+#: yayforms.php:268
+msgid "Height:"
+msgstr "Altura:"
+
+#: yayforms.php:269
+msgid "Size:"
+msgstr "Tamanho:"
+
+#: yayforms.php:270
+msgid "Position:"
+msgstr "Posição:"
+
+#: yayforms.php:271
+msgid "Button Color:"
+msgstr "Cor do botão:"
+
+#: yayforms.php:272
+msgid "Font Size:"
+msgstr "Tamanho da fonte:"
+
+#: yayforms.php:273
+msgid "Rounded Corners:"
+msgstr "Bordas arredondadas:"
+
+#: yayforms.php:274
+msgid "Button Text:"
+msgstr "Texto do botão:"
+
+#: yayforms.php:275
+msgid "Text Color:"
+msgstr "Cor do texto:"
+
+#: yayforms.php:276
+msgid "Small"
+msgstr "Pequeno"
+
+#: yayforms.php:277
+msgid "Medium"
+msgstr "Médio"
+
+#: yayforms.php:278
+msgid "Large"
+msgstr "Grande"
+
+#: yayforms.php:279
+msgid "Right"
+msgstr "Direita"
+
+#: yayforms.php:280
+msgid "Left"
+msgstr "Esquerda"
