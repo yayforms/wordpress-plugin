@@ -4,7 +4,7 @@ Tags: forms, surveys, quizzes, form builder, survey builder
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GNU General Public License v3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,6 +61,9 @@ Enhance your workflow by connecting with the tools you already use:
 * Keep your Yay! Forms plugin updated to ensure optimal performance and security. Stay connected with our updates and improvements by joining our [community forum or user group].
 
 == Changelog ==
+
+= 1.4.1 =
+* i18n: Ship Brazilian Portuguese (pt_BR) and Spanish (es_ES) translations for the admin interface.
 
 = 1.4 =
 * Security: Removed shortcode-level nonce bypass; hardened the admin AJAX preview handler to only render [yayforms] shortcodes.

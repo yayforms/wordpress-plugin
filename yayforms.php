@@ -3,7 +3,7 @@
 Plugin Name: Yay! Forms
 Plugin URI: https://yayforms.com
 Description: Embeds Yay! Forms in WordPress with various options and a user-friendly GUI for shortcode generation.
-Version: 1.4
+Version: 1.4.1
 Requires at least: 6.0
 Requires PHP: 7.4
 Author: Yay! Forms
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('YAYFORMS_VERSION', '1.4');
+define('YAYFORMS_VERSION', '1.4.1');
 define('YAYFORMS_EMBED_URL', 'https://embed.yayforms.link/next/embed.js');
 
 function yayforms_load_textdomain() {
