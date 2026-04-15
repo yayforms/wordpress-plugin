@@ -209,7 +209,7 @@ function yayforms_shortcode($atts) {
     }
     wp_enqueue_script('yayforms-embed');
     
-    // Para Elementor preview, adicionar o script diretamente no HTML
+    // For Elementor preview, inject the script tag inline
     $is_elementor_preview = isset($_GET['elementor-preview'])
         || (isset($_GET['action']) && sanitize_text_field(wp_unslash($_GET['action'])) === 'elementor');
     if (is_admin() || $is_elementor_preview) {
