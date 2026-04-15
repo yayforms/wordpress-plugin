@@ -8,3 +8,6 @@
 
 # SVN mirror used to publish to wordpress.org — not tracked in git
 yayforms/
+
+# Local build artifacts
+yayforms.zip
